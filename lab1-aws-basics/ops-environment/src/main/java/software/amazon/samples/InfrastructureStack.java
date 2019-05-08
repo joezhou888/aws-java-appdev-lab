@@ -31,7 +31,9 @@ public class InfrastructureStack extends Stack {
             .build());
 
         // create a vpc (software defined network)
-        VpcNetwork vpc = new VpcNetwork(this, "PetclinicVPC", VpcNetworkProps.builder().build());
+        VpcNetwork vpc = new VpcNetwork(this, "vpc-ee1ab389", VpcNetworkProps.builder().build());
+        //VpcNetwork vpc = null;
+       // IVpcNetwork iVpcNetwork = VpcNetwork.importFromContext(this, "vpc-ee1ab389", VpcNetworkProps.builder().build());
 
         // create an autoscaling group and place it within the vpc
         AutoScalingGroup asg = new AutoScalingGroup(this, "PetClinicAutoScale",
