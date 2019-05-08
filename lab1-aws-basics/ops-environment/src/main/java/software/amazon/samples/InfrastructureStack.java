@@ -31,7 +31,7 @@ public class InfrastructureStack extends Stack {
             .build());
 
         // create a vpc (software defined network)
-        VpcNetwork vpc = new VpcNetwork(this, "vpc-ee1ab389", VpcNetworkProps.builder().build());
+        IVpcNetwork vpc = VpcNetwork.importFromContext(this, "vpc-ee1ab389", VpcNetworkProviderProps.builder().build());
         //VpcNetwork vpc = null;
        // IVpcNetwork iVpcNetwork = VpcNetwork.importFromContext(this, "vpc-ee1ab389", VpcNetworkProps.builder().build());
 
