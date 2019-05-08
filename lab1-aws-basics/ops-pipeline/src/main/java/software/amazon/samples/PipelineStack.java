@@ -28,8 +28,8 @@ public class PipelineStack extends Stack {
 
     private static final String REGIONAL_ARTIFACT_CACHE_BUCKET_NAME = "jz-codebuild";
 
-    private static final String SECRET_ID = "Joe/github";
-    private static final String SECRET_ID_JSON_FIELD = "oauthToken";
+    private static final String SECRET_ID = "Joe/Github";
+    private static final String SECRET_ID_JSON_FIELD = "Joe/github";
 
     private static final String DOCKER_BUILD_ENV_IMAGE = "jousby/aws-buildbox:1.4.0";
 
