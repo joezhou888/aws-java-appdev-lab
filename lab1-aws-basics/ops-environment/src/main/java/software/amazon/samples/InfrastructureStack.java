@@ -55,6 +55,7 @@ public class InfrastructureStack extends Stack {
                     .withGeneration(AmazonLinuxGeneration.AmazonLinux2)
                     .build()))
                 .withUpdateType(UpdateType.RollingUpdate)
+                .withKeyName("JoeKeyPair")
                 .build());
 
         // grant our ec2 instance roles the permission to read the petclinic jar from s3
