@@ -11,6 +11,7 @@ import software.amazon.awscdk.services.ec2.*;
 import software.amazon.awscdk.services.elasticloadbalancingv2.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class InfrastructureStack extends Stack {
 
@@ -31,9 +32,19 @@ public class InfrastructureStack extends Stack {
             .build());
 
         // create a vpc (software defined network)
-        IVpcNetwork vpc = VpcNetwork.importFromContext(this, "vpc-ee1ab389", VpcNetworkProviderProps.builder().build());
-        //VpcNetwork vpc = null;
-       // IVpcNetwork iVpcNetwork = VpcNetwork.importFromContext(this, "vpc-ee1ab389", VpcNetworkProps.builder().build());
+        //VpcNetwork vpc = new VpcNetwork(this, "PetclinicVPC", VpcNetworkProps.builder().build());
+
+
+        VpcNetworkImportProps.Builder builder = VpcNetworkImportProps.builder();
+        List<String> zones=Arrays.asList("ap-southeast-2a","ap-southeast-2b");
+        List<String> privateSubnetIds=Arrays.asList("subnet-070a6e4e","subnet-308fe457");
+        builder.withPrivateSubnetIds(privateSubnetIds);
+        List<String> publicSubnetIds=Arrays.asList("subnet-cc8fe4ab","subnet-5e167217");
+        builder.withPrivateSubnetIds(privateSubnetIds);
+        builder.withPublicSubnetIds(publicSubnetIds);
+        builder.withAvailabilityZones(zones);
+        builder.withVpcId("vpc-ee1ab389");
+        IVpcNetwork vpc = VpcNetwork.import_(this, "ICT AWS Coders VPC", builder.build());
 
         // create an autoscaling group and place it within the vpc
         AutoScalingGroup asg = new AutoScalingGroup(this, "PetClinicAutoScale",
