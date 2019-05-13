@@ -54,7 +54,7 @@ public class PipelineStack extends Stack {
 
         // Create a pipeline
         PipelineProps.Builder builder = PipelineProps.builder();
-        builder.withArtifactBucket(regionalArtifactCache);
+        //builder.withArtifactBucket(regionalArtifactCache);
         Pipeline pipeline = new Pipeline(this, "PetClinicPipeline", builder.build());
 
 
