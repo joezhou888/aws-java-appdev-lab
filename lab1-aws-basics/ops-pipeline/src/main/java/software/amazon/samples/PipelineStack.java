@@ -53,7 +53,10 @@ public class PipelineStack extends Stack {
             .build());
 
         // Create a pipeline
-        Pipeline pipeline = new Pipeline(this, "PetClinicPipeline", PipelineProps.builder().build());
+        PipelineProps.Builder builder = PipelineProps.builder();
+        builder.withArtifactBucket(regionalArtifactCache);
+        Pipeline pipeline = new Pipeline(this, "PetClinicPipeline", builder.build());
+
 
         Artifact sourceArtifact = Artifact.artifact("Source2Artifact");
 
