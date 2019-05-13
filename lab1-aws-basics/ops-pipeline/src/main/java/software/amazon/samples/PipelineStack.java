@@ -55,7 +55,7 @@ public class PipelineStack extends Stack {
         // Create a pipeline
         Pipeline pipeline = new Pipeline(this, "PetClinicPipeline", PipelineProps.builder().build());
 
-        Artifact sourceArtifact = Artifact.artifact("SourceArtifact");
+        Artifact sourceArtifact = Artifact.artifact("Source2Artifact");
 
         // Add a source stage that retrieves our source from github on each commit to a specific branch
         GitHubSourceAction sourceAction = new GitHubSourceAction(GitHubSourceActionProps.builder()
