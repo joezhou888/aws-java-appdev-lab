@@ -7,6 +7,8 @@ import software.amazon.awscdk.services.codepipeline.actions.CodeBuildAction;
 import software.amazon.awscdk.services.codepipeline.actions.CodeBuildActionProps;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceAction;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceActionProps;
+import software.amazon.awscdk.services.ecr.Repository;
+import software.amazon.awscdk.services.ecr.RepositoryImportProps;
 import software.amazon.awscdk.services.s3.Bucket;
 import software.amazon.awscdk.services.s3.BucketImportProps;
 import software.amazon.awscdk.services.s3.IBucket;
@@ -31,7 +33,9 @@ public class PipelineStack extends Stack {
     private static final String SECRET_ID = "Joe/Github";
     private static final String SECRET_ID_JSON_FIELD = "Joe/github";
 
-    private static final String DOCKER_BUILD_ENV_IMAGE = "jousby/aws-buildbox:1.4.0";
+    //private static final String DOCKER_BUILD_ENV_IMAGE = "jousby/aws-buildbox:1.4.0";
+    private static final String DOCKER_BUILD_ENV_IMAGE = "aws/codebuild/java:openjdk-8-1.6.0";
+
 
     private static final String GITHUB_OWNER = "joezhou888";
     private static final String GITHUB_REPO = "aws-java-appdev-lab";
@@ -80,9 +84,12 @@ public class PipelineStack extends Stack {
         // buildspec.yml file (located in the base of this project).
 
         // Leverage a custom docker image that has a specific build toolchain
-        BuildEnvironment buildEnvironment = BuildEnvironment.builder()
-            .withBuildImage(LinuxBuildImage.fromDockerHub(DOCKER_BUILD_ENV_IMAGE))
+        BuildEnvironment buildEnvironment = BuildEnvironment.builder().withBuildImage(LinuxBuildImage.fromEcrRepository(Repository.import_(this,DOCKER_BUILD_ENV_IMAGE, RepositoryImportProps.builder().build())))
+            //.withBuildImage(LinuxBuildImage.fromDockerHub(DOCKER_BUILD_ENV_IMAGE))
             .build();
+
+        //LinuxBuildImage.fromEcrRepository(Repository.import_(this,DOCKER_BUILD_ENV_IMAGE, RepositoryImportProps.builder().build()));
+
 
         PipelineProject buildProject = new PipelineProject(this, "PipelineProject",
             PipelineProjectProps.builder()
