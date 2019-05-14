@@ -6,7 +6,7 @@ public class PipelineApp {
     public static void main(final String argv[]) {
         App app = new App();
 
-        new PipelineStack(app, "petclinic-pipeline2");
+        new PipelineStack(app, "petclinic-pipeline");
 
         app.run();
     }
