@@ -86,8 +86,9 @@ public class PipelineStack extends Stack {
 
         // Leverage a custom docker image that has a specific build toolchain
 
-        BuildEnvironment buildEnvironment = BuildEnvironment.builder().withBuildImage(LinuxBuildImage.UBUNTU_14_04_OPEN_JDK_8)
-            //.withBuildImage(LinuxBuildImage.fromDockerHub(DOCKER_BUILD_ENV_IMAGE))
+        BuildEnvironment buildEnvironment = BuildEnvironment.builder()
+            //.withBuildImage(LinuxBuildImage.UBUNTU_14_04_OPEN_JDK_8)
+            .withBuildImage(LinuxBuildImage.fromDockerHub(DOCKER_BUILD_ENV_IMAGE))
             .build();
 
         //LinuxBuildImage.fromEcrRepository(Repository.import_(this,DOCKER_BUILD_ENV_IMAGE, RepositoryImportProps.builder().build()));
