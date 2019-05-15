@@ -7,6 +7,7 @@ import software.amazon.awscdk.services.codepipeline.actions.CodeBuildAction;
 import software.amazon.awscdk.services.codepipeline.actions.CodeBuildActionProps;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceAction;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceActionProps;
+import software.amazon.awscdk.services.ecr.IRepository;
 import software.amazon.awscdk.services.ecr.Repository;
 import software.amazon.awscdk.services.ecr.RepositoryImportProps;
 import software.amazon.awscdk.services.s3.Bucket;
@@ -84,7 +85,8 @@ public class PipelineStack extends Stack {
         // buildspec.yml file (located in the base of this project).
 
         // Leverage a custom docker image that has a specific build toolchain
-        BuildEnvironment buildEnvironment = BuildEnvironment.builder().withBuildImage(LinuxBuildImage.fromEcrRepository(Repository.import_(this,DOCKER_BUILD_ENV_IMAGE, RepositoryImportProps.builder().build())))
+
+        BuildEnvironment buildEnvironment = BuildEnvironment.builder().withBuildImage(LinuxBuildImage.UBUNTU_14_04_OPEN_JDK_8)
             //.withBuildImage(LinuxBuildImage.fromDockerHub(DOCKER_BUILD_ENV_IMAGE))
             .build();
 
