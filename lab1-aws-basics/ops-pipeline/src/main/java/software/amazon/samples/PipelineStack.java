@@ -7,11 +7,7 @@ import software.amazon.awscdk.services.codepipeline.actions.CodeBuildAction;
 import software.amazon.awscdk.services.codepipeline.actions.CodeBuildActionProps;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceAction;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceActionProps;
-import software.amazon.awscdk.services.ecr.IRepository;
-import software.amazon.awscdk.services.ecr.Repository;
-import software.amazon.awscdk.services.ecr.RepositoryImportProps;
 import software.amazon.awscdk.services.s3.Bucket;
-import software.amazon.awscdk.services.s3.BucketImportProps;
 import software.amazon.awscdk.services.s3.IBucket;
 
 import java.util.Arrays;
@@ -50,8 +46,7 @@ public class PipelineStack extends Stack {
     public PipelineStack(final App parent, final String name, final StackProps props) {
         super(parent, name, props);
 
-        IBucket regionalArtifactCache = Bucket.import_(this, "artifactCache", BucketImportProps.builder()
-            .withBucketName(REGIONAL_ARTIFACT_CACHE_BUCKET_NAME).build());
+        IBucket regionalArtifactCache = Bucket.fromBucketName(this, "artifactCache",REGIONAL_ARTIFACT_CACHE_BUCKET_NAME);
 
         SecretValue githubToken = SecretValue.secretsManager(SECRET_ID, SecretsManagerSecretOptions.builder()
             .withJsonField(SECRET_ID_JSON_FIELD)
