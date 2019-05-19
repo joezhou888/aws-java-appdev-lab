@@ -3,10 +3,7 @@ package software.amazon.samples;
 import software.amazon.awscdk.*;
 import software.amazon.awscdk.services.codebuild.*;
 import software.amazon.awscdk.services.codepipeline.*;
-import software.amazon.awscdk.services.codepipeline.actions.CodeBuildAction;
-import software.amazon.awscdk.services.codepipeline.actions.CodeBuildActionProps;
-import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceAction;
-import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceActionProps;
+import software.amazon.awscdk.services.codepipeline.actions.*;
 import software.amazon.awscdk.services.s3.Bucket;
 import software.amazon.awscdk.services.s3.IBucket;
 
